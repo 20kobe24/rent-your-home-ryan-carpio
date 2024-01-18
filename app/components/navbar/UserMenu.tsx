@@ -4,9 +4,11 @@ import { AiOutlineMenu } from 'react-icons/ai';
 import Avatar from '../Avatar';
 import { useCallback, useState } from 'react';
 import MenuItem from './MenuItem';
+import useRegisterModal from '@/app/hooks/useRegisterModal';
 
 
 const UserMenu = () => {
+  const registerModal = useRegisterModal();
   const [isOpen, setIsOpen] = useState(false);
 
   //reverses current value of isOpen, using !
@@ -81,7 +83,7 @@ const UserMenu = () => {
                 label="Login"
               />
               <MenuItem
-                onClick={() => { }}
+                onClick={registerModal.onOpen}
                 label="Sign up"
               />
             </>
