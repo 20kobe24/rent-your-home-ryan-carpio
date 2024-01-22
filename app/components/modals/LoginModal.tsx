@@ -65,7 +65,7 @@ const LoginModal = () => {
     <div className=' flex flex-col gap-4'>
       <Heading
         title="Welcome back!"
-        subtitle='Login ot your account'
+        subtitle='Login to your account'
       />
       <Input
         id="email"
@@ -144,8 +144,6 @@ const LoginModal = () => {
       onSubmit={handleSubmit(onSubmit)}
       body={bodyContent}
       footer={footerContent}
-
-
     />
   );
 }
