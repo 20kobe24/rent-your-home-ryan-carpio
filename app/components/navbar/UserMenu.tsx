@@ -4,7 +4,7 @@ import { AiOutlineMenu } from 'react-icons/ai';
 import Avatar from '../Avatar';
 import { useCallback, useState } from 'react';
 import MenuItem from './MenuItem';
-
+import useRentModal from '@/app/hooks/useRentModal';
 import useRegisterModal from '@/app/hooks/useRegisterModal';
 import useLoginModal from '@/app/hooks/useLoginModel';
 import { User } from '@prisma/client';
@@ -21,16 +21,24 @@ const UserMenu: React.FC<UserMenuProps> = ({
   const registerModal = useRegisterModal();
   const [isOpen, setIsOpen] = useState(false);
   const loginModal = useLoginModal();
+  const rentModal = useRentModal();
   //reverses current value of isOpen, using !
   const toggleOpen = useCallback(() => {
     setIsOpen((value) => !value)
   }, []);
 
+  const onRent = useCallback(() => {
+    if (!currentUser) {
+      return loginModal.onOpen();
+    }
+    rentModal.onOpen();
+  }, [currentUser, loginModal, rentModal]);
+
   return (
     <div className="relative">
       <div className="flex flex-row items-center gap-3">
         <div
-          onClick={() => { }}
+          onClick={onRent}
           className="
             hidden
             md:block
@@ -106,7 +114,7 @@ const UserMenu: React.FC<UserMenuProps> = ({
                   label="My properties"
                 />
                 <MenuItem
-                  onClick={() => { }}
+                  onClick={rentModal.onOpen}
                   label="Airbnb my home"
                 />
                 <hr />
